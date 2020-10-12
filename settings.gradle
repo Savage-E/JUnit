@@ -1,0 +1,4 @@
+rootProject.name = 'JUnit'
+include 'controller'
+include 'models'
+

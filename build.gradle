@@ -1,0 +1,16 @@
+group 'ru.mail'
+version '1.0-SNAPSHOT'
+
+allprojects {
+
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+        implementation 'com.intellij:annotations:12.0'
+
+    }
+}
