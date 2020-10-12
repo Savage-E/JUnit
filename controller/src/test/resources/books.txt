@@ -3,13 +3,13 @@
     "author": {
       "name": "Leo"
     },
-    "name": "World and Peace"
+    "name": "War and Peace"
   },
   {
     "author": {
       "name": "Fydor"
     },
-    "name": "Cryme and punishment"
+    "name": "Crime and punishment"
   },
   {
       "author": {

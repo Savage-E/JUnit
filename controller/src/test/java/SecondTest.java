@@ -19,7 +19,7 @@ public class SecondTest {
     private final PrintStream originalOut = System.out;
 
     private @NotNull
-    LibraryController library = new LibraryController(6, "F:\\IntellijIdea\\JUnit\\controller\\src\\test\\resources\\books.txt");
+    LibraryController library = new LibraryController(8, "F:\\IntellijIdea\\JUnit\\controller\\src\\test\\resources\\books.txt");
 
     @Before
     public void setUpStreams() {
@@ -40,7 +40,7 @@ public class SecondTest {
     @Test
     public void takeBookReturnBookInfoTest() {
         library.takeBook(0);
-        assertThat(outContent.toString(), allOf(containsString("Cell 0"), containsString("World and Peace"), containsString("Leo")));
+        assertThat(outContent.toString(), allOf(containsString("Cell 0"), containsString("War and Peace"), containsString("Leo")));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -51,7 +51,7 @@ public class SecondTest {
 
     @Test
     public void TakeNeededAndGetSameBookTest() {
-        String[] expected = {"Cell 0", "Leo", "World and Peace"};
+        String[] expected = {"Cell 0", "Leo", "War and Peace"};
         library.takeBook(0);
         String actual = outContent.toString();
         assertTrue(actual.contains(expected[0]));
@@ -77,8 +77,30 @@ public class SecondTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void addBookToFullLibraryTest(){
-        library.addBook(new BookModel(new AuthorModel("TestAuthor"),"TestBook"));
+        library.addBook(new BookModel(new AuthorModel("TestAuthor1"),"TestBook1"));
+        library.addBook(new BookModel(new AuthorModel("TestAuthor1"),"TestBook2"));
+        library.addBook(new BookModel(new AuthorModel("TestAuthor2"),"TestBook3"));
 
     }
+
+    @Test
+    public void printContentTest()
+    {
+        new LibraryController(3,"F:\\IntellijIdea\\JUnit\\controller\\src\\test\\resources\\Books1.txt");
+        library.printContent();
+        String[] expected = {"Cell 0", "Leo", "War and Peace","Cell 1", "Fydor", "Crime and punishment","Cell 2", "Author9", "Book 3"};
+
+        String actual = outContent.toString();
+        assertTrue(actual.contains(expected[0]));
+        assertTrue(actual.contains(expected[1]));
+        assertTrue(actual.contains(expected[2]));
+        assertTrue(actual.contains(expected[3]));
+        assertTrue(actual.contains(expected[5]));
+        assertTrue(actual.contains(expected[6]));
+        assertTrue(actual.contains(expected[7]));
+        assertTrue(actual.contains(expected[8]));
+    }
+
+
 
 }

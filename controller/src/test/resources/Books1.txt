@@ -1,0 +1,20 @@
+[
+  {
+    "author": {
+      "name": "Leo"
+    },
+    "name": "World and Peace"
+  },
+  {
+    "author": {
+      "name": "Fydor"
+    },
+    "name": "Cryme and punishment"
+  },
+  {
+      "author": {
+        "name": "Author9"
+      },
+      "name": "Book 3"
+    }
+]
