@@ -18,7 +18,6 @@ public class LibraryController {
     ArrayList<BookModel> books;
 
 
-
     public LibraryController(int capacity, @NotNull String fileName) {
         this.fileName = fileName;
         final Injector injector = Guice.createInjector(new MainModule());
@@ -59,11 +58,12 @@ public class LibraryController {
         }
     }
 
-    private void fillLibrary(ArrayList<BookModel> books) {
+    private void fillLibrary(@NotNull ArrayList<BookModel> books) {
         if (books.size() <= library.size()) {
             for (int i = 0; i < books.size(); i++) {
                 library.set(i, books.get(i));
             }
+
         } else
             throw new IndexOutOfBoundsException();
 

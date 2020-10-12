@@ -11,8 +11,8 @@ public class LibraryFactoryImpl implements LibraryFactory {
     ArrayList<BookModel> library;
 
     @Inject
-    public LibraryFactoryImpl(){
-        library=new ArrayList<>();
+    public LibraryFactoryImpl() {
+        library = new ArrayList<>();
     }
 
 
@@ -22,8 +22,6 @@ public class LibraryFactoryImpl implements LibraryFactory {
         initLibrary(capacity);
         return library;
     }
-
-
     private void initLibrary(int capacity) {
         for (int i = 0; i < capacity; i++) {
             library.add(null);
