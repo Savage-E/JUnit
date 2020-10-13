@@ -9,7 +9,7 @@ public class LibraryApplication {
         String fileName = "";
 
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Enter file address");
+            System.out.println("Enter absolute file address");
             fileName = scanner.nextLine();
             System.out.println("Enter library size");
             capacity = scanner.nextInt();

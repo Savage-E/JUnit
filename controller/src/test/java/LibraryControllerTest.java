@@ -10,31 +10,26 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertTrue;
 
-public class MainTest {
+public class LibraryControllerTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
-    private @NotNull
-    final
-    LibraryController library = new LibraryController(8, "F:\\IntellijIdea\\JUnit\\controller\\src\\test\\resources\\books.txt");
+    private @NotNull LibraryController library = new LibraryController(8, "src\\test\\resources\\books.txt");
 
-    @Before
-    public void setUpStreams() {
+    @Before public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
     }
 
-    @After
-    public void restoreStreams() {
+    @After public void restoreStreams() {
         System.setOut(originalOut);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void createLibraryExceptionReturnTest() {
-        new LibraryController(8, "F:\\IntellijIdea\\JUnit\\controller\\src\\main\\resources\\books.txt");
+        new LibraryController(8, "src\\main\\resources\\books.txt");
     }
 
 
@@ -68,12 +63,12 @@ public class MainTest {
         library.takeBook(4);
         String[] expected = {"Cell 2", "TestAuthor", "TestBook"};
         library.addBook(new BookModel(new AuthorModel("TestAuthor"), "TestBook"));
-        library.takeBook(4);
+        library.takeBook(2);
         String actual = outContent.toString();
         assertTrue(actual.contains(expected[0]));
         assertTrue(actual.contains(expected[1]));
         assertTrue(actual.contains(expected[2]));
-
+        library.takeBook(4);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -86,7 +81,7 @@ public class MainTest {
 
     @Test
     public void printContentTest() {
-        new LibraryController(3, "F:\\IntellijIdea\\JUnit\\controller\\src\\test\\resources\\Books1.txt");
+        library = new LibraryController(3, "src\\test\\resources\\Books1.txt");
         library.printContent();
         String[] expected = {"Cell 0", "Leo", "War and Peace", "Cell 1", "Fydor", "Crime and punishment", "Cell 2", "Author9", "Book 3"};
 
@@ -95,9 +90,30 @@ public class MainTest {
         assertTrue(actual.contains(expected[1]));
         assertTrue(actual.contains(expected[2]));
         assertTrue(actual.contains(expected[3]));
+        assertTrue(actual.contains(expected[4]));
         assertTrue(actual.contains(expected[5]));
         assertTrue(actual.contains(expected[6]));
         assertTrue(actual.contains(expected[7]));
         assertTrue(actual.contains(expected[8]));
     }
+
+    @Test
+    public void CheckRightOrderOfBooksReturnedBookFactoryTest() {
+        library = new LibraryController(5, "src\\test\\resources\\Books1.txt");
+        library.printContent();
+        String actual = outContent.toString();
+        String[] expected = {"Cell 0", "Leo", "War and Peace", "Cell 1", "Fydor", "Crime and punishment", "Cell 2", "Author9", "Book 3", "Cell 3 :null", "Cell 4 :null"};
+
+        assertThat(actual.indexOf(expected[0]), lessThan(actual.indexOf(expected[1])));
+        assertThat(actual.indexOf(expected[1]), lessThan(actual.indexOf(expected[2])));
+        assertThat(actual.indexOf(expected[2]), lessThan(actual.indexOf(expected[3])));
+        assertThat(actual.indexOf(expected[3]), lessThan(actual.indexOf(expected[4])));
+        assertThat(actual.indexOf(expected[4]), lessThan(actual.indexOf(expected[5])));
+        assertThat(actual.indexOf(expected[5]), lessThan(actual.indexOf(expected[6])));
+        assertThat(actual.indexOf(expected[6]), lessThan(actual.indexOf(expected[7])));
+        assertThat(actual.indexOf(expected[7]), lessThan(actual.indexOf(expected[8])));
+        assertThat(actual.indexOf(expected[8]), lessThan(actual.indexOf(expected[9])));
+        assertThat(actual.indexOf(expected[9]), lessThan(actual.indexOf(expected[10])));
+    }
+
 }
