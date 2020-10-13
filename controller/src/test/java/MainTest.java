@@ -14,11 +14,12 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertTrue;
 
-public class SecondTest {
+public class MainTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
     private @NotNull
+    final
     LibraryController library = new LibraryController(8, "F:\\IntellijIdea\\JUnit\\controller\\src\\test\\resources\\books.txt");
 
     @Before
@@ -66,7 +67,7 @@ public class SecondTest {
         library.takeBook(2);
         library.takeBook(4);
         String[] expected = {"Cell 2", "TestAuthor", "TestBook"};
-        library.addBook(new BookModel(new AuthorModel("TestAuthor"),"TestBook"));
+        library.addBook(new BookModel(new AuthorModel("TestAuthor"), "TestBook"));
         library.takeBook(4);
         String actual = outContent.toString();
         assertTrue(actual.contains(expected[0]));
@@ -76,19 +77,18 @@ public class SecondTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void addBookToFullLibraryTest(){
-        library.addBook(new BookModel(new AuthorModel("TestAuthor1"),"TestBook1"));
-        library.addBook(new BookModel(new AuthorModel("TestAuthor1"),"TestBook2"));
-        library.addBook(new BookModel(new AuthorModel("TestAuthor2"),"TestBook3"));
+    public void addBookToFullLibraryTest() {
+        library.addBook(new BookModel(new AuthorModel("TestAuthor1"), "TestBook1"));
+        library.addBook(new BookModel(new AuthorModel("TestAuthor1"), "TestBook2"));
+        library.addBook(new BookModel(new AuthorModel("TestAuthor2"), "TestBook3"));
 
     }
 
     @Test
-    public void printContentTest()
-    {
-        new LibraryController(3,"F:\\IntellijIdea\\JUnit\\controller\\src\\test\\resources\\Books1.txt");
+    public void printContentTest() {
+        new LibraryController(3, "F:\\IntellijIdea\\JUnit\\controller\\src\\test\\resources\\Books1.txt");
         library.printContent();
-        String[] expected = {"Cell 0", "Leo", "War and Peace","Cell 1", "Fydor", "Crime and punishment","Cell 2", "Author9", "Book 3"};
+        String[] expected = {"Cell 0", "Leo", "War and Peace", "Cell 1", "Fydor", "Crime and punishment", "Cell 2", "Author9", "Book 3"};
 
         String actual = outContent.toString();
         assertTrue(actual.contains(expected[0]));
@@ -100,7 +100,4 @@ public class SecondTest {
         assertTrue(actual.contains(expected[7]));
         assertTrue(actual.contains(expected[8]));
     }
-
-
-
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class LibraryFactoryImpl implements LibraryFactory {
 
     private @NotNull
-    ArrayList<BookModel> library;
+    final ArrayList<BookModel> library;
 
     @Inject
     public LibraryFactoryImpl() {
@@ -22,6 +22,7 @@ public class LibraryFactoryImpl implements LibraryFactory {
         initLibrary(capacity);
         return library;
     }
+
     private void initLibrary(int capacity) {
         for (int i = 0; i < capacity; i++) {
             library.add(null);

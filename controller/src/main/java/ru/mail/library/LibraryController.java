@@ -10,12 +10,9 @@ import java.util.ArrayList;
 
 public class LibraryController {
 
-    private @NotNull
-    ArrayList<BookModel> library;
-    private @NotNull
-    String fileName;
-    private @NotNull
-    ArrayList<BookModel> books;
+    private @NotNull final ArrayList<BookModel> library;
+    private @NotNull final String fileName;
+    private @NotNull final ArrayList<BookModel> books;
 
 
     public LibraryController(int capacity, @NotNull String fileName) {

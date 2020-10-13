@@ -6,7 +6,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -24,6 +23,7 @@ public final class FileBooksFactory implements BooksFactory {
     @Inject
     public FileBooksFactory() {
     }
+
     @NotNull
     @Override
     public Collection<BookModel> books(@NotNull String fileName) {

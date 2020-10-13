@@ -1,8 +1,5 @@
 package ru.mail.library;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -23,10 +20,6 @@ public class LibraryApplication {
 
         LibraryController library = new LibraryController(capacity, fileName);
         library.printContent();
-        library.takeBook(0);
-
-
-
 
 
     }

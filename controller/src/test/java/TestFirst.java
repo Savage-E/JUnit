@@ -1,11 +1,19 @@
 import com.google.inject.Inject;
+import net.lamberto.junit.GuiceJUnitRunner;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import ru.mail.library.BookModel;
+import ru.mail.library.BooksFactory;
 import ru.mail.library.LibraryFactory;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.junit.Assert.*;
 
@@ -15,16 +23,11 @@ public class TestFirst extends TestBase{
 
      @Test
     public void libraryFactoryInitializeTest(){
-        ArrayList<BookModel> expected = new ArrayList<>();
-        int capacity=10;
-        for (int i = 0; i < capacity; i++) {
-            expected.add(null);
-        }
-        ArrayList<BookModel> actual = libraryFactory.library(10);
-        assertTrue(actual.contains(null));
-        assertEquals(expected.size(),actual.size());
-    }
-
+        libraryFactory= Mockito.mock(LibraryFactory.class);
+        Mockito.when(libraryFactory.library(Mockito.anyInt())).thenReturn((new ArrayList<BookModel>()));
+         assertThat(libraryFactory.library(2) ,is(empty()));
+         assertThat(libraryFactory.library(2) ,hasSize(0));
+     }
 
 
 }

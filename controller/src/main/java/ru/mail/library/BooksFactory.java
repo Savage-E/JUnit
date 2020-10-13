@@ -5,5 +5,5 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 
 public interface BooksFactory {
-     Collection<BookModel> books(@NotNull String fileName);
+    Collection<BookModel> books(@NotNull String fileName);
 }
